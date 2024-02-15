@@ -31,7 +31,7 @@ async function gravarHTML(html_path) {
   const table_licitacoes = $("#app table").not(".tex3, .td, #loading").first();
   console.log(table_licitacoes);
 
-  $(".td",table_licitacoes).each(function (index, element) {
+  $(".td", table_licitacoes).each(function (index, element) {
     let dados_array = [];
 
     let item = $("td", element).eq(0).text();
@@ -50,44 +50,43 @@ async function gravarHTML(html_path) {
     });
 
     // console.log(dados_array)
-    
 
     let licitacao_obj = {};
 
     $.each(dados_array, function (index, value) {
       switch (index) {
         case 0:
-          Object.assign(licitacao_obj, {"item": value});
+          Object.assign(licitacao_obj, { item: value });
           break;
         case 1:
-          Object.assign(licitacao_obj, {"descricao": value});
+          Object.assign(licitacao_obj, { descricao: value });
           break;
         case 2:
-          Object.assign(licitacao_obj, {"descricao_complementar": value});
+          Object.assign(licitacao_obj, { descricao_complementar: value });
           break;
         case 3:
-          Object.assign(licitacao_obj, {"tratamento_diferenciado": value});
+          Object.assign(licitacao_obj, { tratamento_diferenciado: value });
           break;
         case 4:
-          Object.assign(licitacao_obj, {"quantidade": value});
+          Object.assign(licitacao_obj, { quantidade: value });
           break;
         case 5:
-          Object.assign(licitacao_obj, {"descricao_complementar": value});
+          Object.assign(licitacao_obj, { descricao_complementar: value });
           break;
         case 6:
-          Object.assign(licitacao_obj, {"unidade_fornecimento": value});
+          Object.assign(licitacao_obj, { unidade_fornecimento: value });
           break;
         case 7:
-          Object.assign(licitacao_obj, {"maximo_aceitavel": value});
+          Object.assign(licitacao_obj, { maximo_aceitavel: value });
           break;
         case 8:
-          Object.assign(licitacao_obj, {"situacao": value});
+          Object.assign(licitacao_obj, { situacao: value });
           break;
         case 9:
-          Object.assign(licitacao_obj, {"aplicabilidade_decreto": value});
+          Object.assign(licitacao_obj, { aplicabilidade_decreto: value });
           break;
         case 10:
-          Object.assign(licitacao_obj, {"intervalo_lances": value});
+          Object.assign(licitacao_obj, { intervalo_lances: value });
           break;
 
         default:
@@ -96,7 +95,6 @@ async function gravarHTML(html_path) {
     });
 
     // console.log(licitacao_obj);
-    
 
     licitacoes.push(licitacao_obj);
 
@@ -115,9 +113,10 @@ async function gravarHTML(html_path) {
     // let aplicabilidade_margem = $("td td", this).html();
     // let intervalo_lances = $("td td", this).html();
     // console.log($("#app table .td ").eq(0).html());
-    
   });
+
   console.log(licitacoes);
+  post_data(licitacoes);
 }
 
 function readHtml(html) {
@@ -126,6 +125,34 @@ function readHtml(html) {
       resolve(data);
     });
   });
+}
+
+function post_data(licitacoes) {
+  console.log(licitacoes);
+
+//   $.ajax({
+//     type: "get",
+//     url: "api/api.php",
+//     dataType: "string",
+//     success: function(data) {
+//         console.log(data)
+//     },
+//     error: function(xhr, status) {
+//         console.log("Algum erro")
+//     }
+// });
+
+$.get("api/api.php",
+  function (data, textStatus, jqXHR) {
+    console.log(data)
+  }
+);
+
+  // $.post("api/api.php", "teste",
+  //   function (data, textStatus, jqXHR) {
+  //     console.log(data);
+  //   }
+  // );
 }
 
 // async function getFile() {
